@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <!-- 导入react/bebel -->
+    <script src="https://cdn.bootcss.com/react/16.6.0/umd/react.development.js"></script>
+    <!-- 导入react-dom -->
+    <script src="https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development.js"></script>
+    <!-- 导入babel -->
+    <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div><!--当前页面组件，用来承载动态数据-->
+    <script type="text/babel">//当前type类型必须为 text/babel ，用来转换ES6语法使浏览器解析
+
+        
+        var msg=(<div>
+            <h1>hello h1</h1>
+            <h2>hello h2</h2>
+        </div>);
+
+
+        ReactDOM.render(msg,document.getElementById('app'));//将第一个参数渲染到获取到的app中
+
+        /* 
+            第一个参数必须为具有一个根节点的jsx
+            所以msg中必须有一个父级节点
+        
+         */
+       
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <!-- 导入react/bebel -->
+    <script src="https://cdn.bootcss.com/react/16.6.0/umd/react.development.js"></script>
+    <!-- 导入react-dom -->
+    <script src="https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development.js"></script>
+    <!-- 导入babel -->
+    <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type='text/babel'>
+
+        //生命周期函数应该写在当前实例对象内部
+
+        /* 
+            获取默认props属性
+            组件即将绑定
+            组件渲染
+            组件绑定之后
+
+            判断组件是否应该更新？
+            true:
+                组件即将更新
+                组件重新渲染
+                组件已经更新
+            false:
+                不更新
+
+        
+         */
+
+        class MyDiv extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    msg:"zhongguo"
+                }
+            }
+            render(){
+                return(
+                    <div>
+                        <h1>{this.state.msg}</h1>
+                        <h1>{this.props.title}</h1>
+                    </div>
+                )
+            }
+        }
+
+
+
+        //组件默认值的显示？如果组件<MyDiv/>未传递参数，可以通过以下方式设置默认值，如果传递了参数，修改默认值
+
+        MyDiv.defaultProps={
+            title:"hello,this is myDiv"
+        }
+
+
+        
+
+
+        //组件渲染
+        ReactDOM.render(<MyDiv title="oh，hello"/>,document.getElementById("app"));
+
+
+    </script>
+</body>
+</html>

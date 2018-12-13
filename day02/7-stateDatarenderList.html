@@ -14,26 +14,37 @@
     <div id="app"></div><!--当前页面组件，用来承载动态数据-->
     <script type="text/babel">//当前type类型必须为 text/babel ，用来转换ES6语法使浏览器解析
 
-        var h1="hello,h1--";
-        var h2=true;
-        var h3=false;
-        var h4=null;
-        var h5=undefined;
-        var msg=(<div>
-            <h1>{h1},{h4},{h5}</h1>
-            <h2>hello h2{h2.toString()},{h3.toString()}</h2>
-        </div>);
+        class MyDiv extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    h1:"哈哈哈哈",
+                    students:[{id:1001,name:'terry'},{id:1002,name:'tom'}]
+                }
+            }
+
+
+            render(){
+                return (
+                  <ul>
+                    {this.state.students.map((item)=>{
+                        return <li key={item.id}>{item.id}---{item.name}</li>
+                    })}
+                  </ul>
+                )
+            }
+
+        }
+        
+
+
+        
+        let msg=<MyDiv name="hello,ppp"/>;
 
 
         ReactDOM.render(msg,document.getElementById('app'));//将第一个参数渲染到获取到的app中
 
-        /* 
-            第一个参数必须为具有一个根节点的jsx
-            所以msg中必须有一个父级节点
-            msg中如若需要变量值，
-            可以直接声明，变量获取使用{}包起
         
-         */
        
 
     </script>

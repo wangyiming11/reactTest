@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <!-- 导入react/bebel -->
+    <script src="https://cdn.bootcss.com/react/16.6.0/umd/react.development.js"></script>
+    <!-- 导入react-dom -->
+    <script src="https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development.js"></script>
+    <!-- 导入babel -->
+    <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type='text/babel'>
+
+        class MyDiv extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    msg:"zhongguo"
+                }
+            }
+
+          
+            //成员方法，自定义函数，写在组件内部，不需要加function关键字
+           /*  handlerClick(e){
+               // console.log(this);//undefined,需要使用箭头函数给this赋值或者在调用函数时传递this
+                console.log(e.currentTarget.nodeName);
+            } */
+
+            handlerClick=(e)=>{
+                console.log(this);//返回值为实例对象
+                console.log(e.target);//返回值为dom对象
+                console.log(e.currentTarget);//返回值为DOM对象
+            }
+
+
+            render(){//组件渲染，此时还未渲染完毕
+                return(
+                    <div className="myDiv" onClick={this.handlerClick}>
+                        <h1>{this.state.msg}</h1>
+                        <h1>{this.props.title}</h1>
+                    </div>
+                )
+            }
+        }
+
+
+
+
+        
+
+
+        //组件渲染
+        ReactDOM.render(<MyDiv title="hei,this is myDiv"/>,document.getElementById("app"));
+
+
+    </script>
+    <style>
+        .myDiv{
+            border:1px solid red
+        }
+    </style>
+</body>
+</html>

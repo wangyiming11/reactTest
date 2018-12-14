@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <!-- 导入react/bebel -->
+    <script src="https://cdn.bootcss.com/react/16.6.0/umd/react.development.js"></script>
+    <!-- 导入react-dom -->
+    <script src="https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development.js"></script>
+    <!-- 导入babel -->
+    <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type='text/babel'>
+
+        class MyDiv extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    msg:"zhongguo"
+                }
+            }
+
+          
+        
+
+            handlerClick=(e,a)=>{
+                //事件绑定参数的定义中写法：回调函数--》在{}里重新声明函数，将event传递给内部调用的handlerClick，不需要加bind()传递参数，此时event可以自定义位置
+                console.log(a);//将自定义实参传递给第二个参数
+                console.log(e);//将event对象传递给第一个形参
+               
+            }
+
+
+            render(){//组件渲染，此时还未渲染完毕
+                return(
+                    <div className="myDiv" onClick={(e)=>{this.handlerClick(e,1)}}>
+                        <h1>{this.state.msg}</h1>
+                        <h1>{this.props.title}</h1>
+                    </div>
+                )
+            }
+        }
+
+
+
+
+        
+
+
+        //组件渲染
+        ReactDOM.render(<MyDiv title="hei,this is myDiv"/>,document.getElementById("app"));
+
+
+    </script>
+    <style>
+        .myDiv{
+            border:1px solid red
+        }
+    </style>
+</body>
+</html>

@@ -14,21 +14,23 @@
     <div id="app"></div>
     <script type='text/babel'>
 
-        //生命周期函数应该写在当前实例对象内部
+        //生命周期函数应该写在当前实例对象内部,不能加function关键字
 
         /* 
-            获取默认props属性
-            组件即将绑定
-            组件渲染
-            组件绑定之后
+            获取默认props属性 :组件名.defaultProps={}  写在组件外
+            组件即将绑定      :componentWillMount(){}
+            组件渲染          :render(){}
+            组件绑定之后       :componentDidMount(){}
 
-            判断组件是否应该更新？
+            判断组件是否应该更新？:shouldComponentUpdate(){}
             true:
-                组件即将更新
-                组件重新渲染
-                组件已经更新
+                组件即将更新      :componentWillUpdate(){}
+                组件重新渲染      :render()
+                组件已经更新      :componentDidUpdate(){}
             false:
                 不更新
+
+            组件卸载            :componentUnMount(){}
 
         
          */
@@ -40,7 +42,43 @@
                     msg:"zhongguo"
                 }
             }
-            render(){
+
+            //生命周期
+            componentWillMount(){//组件即将绑定
+                alert("componentWillMount");
+
+            }
+
+            componentDidMount(){//组件已经绑定,此时组件渲染完毕
+                alert("componentDidMount---");
+                this.setState({
+                    msg:"hello,你好！"
+                })
+            }
+
+            shouldComponentUpdate(){//组件是否应该更新，重新渲染？需要返回boolean值
+                /*
+                在此阶段前componentDidMount中已经做了数据修改，此时返回true，执行组件更新，返回false，不进行数据更新
+                此周期不写默认返回值为true
+
+                */
+               
+                alert("should Update?");
+                return false
+            }
+
+            componentWillUpdate(){//组件即将更新
+                alert("组件即将更新-");
+            }
+            componentDidUpdate(){//组件更新完毕
+                alert("组件更新完毕--");
+            }
+
+
+
+
+            render(){//组件渲染，此时还未渲染完毕
+                alert("render-----");
                 return(
                     <div>
                         <h1>{this.state.msg}</h1>
@@ -52,18 +90,12 @@
 
 
 
-        //组件默认值的显示？如果组件<MyDiv/>未传递参数，可以通过以下方式设置默认值，如果传递了参数，修改默认值
-
-        MyDiv.defaultProps={
-            title:"hello,this is myDiv"
-        }
-
 
         
 
 
         //组件渲染
-        ReactDOM.render(<MyDiv title="oh，hello"/>,document.getElementById("app"));
+        ReactDOM.render(<MyDiv title="hei,this is myDiv"/>,document.getElementById("app"));
 
 
     </script>

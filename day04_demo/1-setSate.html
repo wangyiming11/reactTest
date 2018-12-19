@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <!-- 导入react/bebel -->
+    <script src="https://cdn.bootcss.com/react/16.6.0/umd/react.development.js"></script>
+    <!-- 导入react-dom -->
+    <script src="https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development.js"></script>
+    <!-- 导入babel -->
+    <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type='text/babel'>
+
+        class MyDiv extends React.Component{
+
+            constructor(){
+                super();
+                this.state={
+                    visible:true,
+                    msg:"hello"
+                }
+            }
+            
+            //事件处理函数
+            handerClick=()=>{
+                this.setState((prevState) => ({
+                    visible: !prevState.visible
+                    }));
+            }
+
+
+            //重写render方法
+            render(){
+                return(
+                    <div className="myDiv" onClick={this.handerClick}>
+                        {this.state.msg}---你好，中国----{this.state.visible?"show":"hidden"}
+                    </div>
+                )
+            }
+        }
+    
+
+
+    ReactDOM.render(<MyDiv/>,document.getElementById('app'));
+    </script>
+    <style>
+        .myDiv{
+            border:1px solid red
+        }
+    </style>
+</body>
+</html>

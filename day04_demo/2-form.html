@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回顾</title>
+    <!-- 导入react/bebel -->
+    <script src="https://cdn.bootcss.com/react/16.6.0/umd/react.development.js"></script>
+    <!-- 导入react-dom -->
+    <script src="https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development.js"></script>
+    <!-- 导入babel -->
+    <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type='text/babel'>
+
+        //组件的声明
+        class MyForm extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                   username:"terry",
+                   password:"123",
+                   gender:'men',
+                   address:'gx',
+                   checked:true,
+                   des:"",//描述
+                   like:[],
+                   addresses:[{
+                       id:1001,
+                       val:'jx',
+                       name:"江西"
+                   },{
+                        id:1002,
+                       val:'js',
+                       name:"江苏"
+                   },{
+                        id:1003,
+                       val:'gx',
+                       name:"广西"
+                   }]
+                }
+            }
+
+            //书写成员方法-实现数据双向绑定：获取当前控件中用户输入的内容，设置给state
+            handlerChange=(event)=>{
+                //event->event对象
+                //this-》当前组件的实例对象
+                //设置属性给state
+                var name=event.target.name;
+                var value=event.target.value;
+                /* this.setState({
+                    [name]:value
+                }); */
+
+                let likes = this.state.like;
+                let index=likes.indexOf(value);//在likes中查找当前用户选择的value，找不到返回-1，找到返回当前元素位置idnex
+                index===-1?likes.push(value):likes.splice(index,1);
+                this.setState({
+                    like:likes
+                });
+            }
+            //成员方法-表单提交事件
+            handlerSubmit=(event)=>{
+                console.log(this.state);
+                event.preventDefault();
+            }
+
+            //必须重写render方法
+            render(){
+                let {username,password,gender,address,checked,addresses,des}=this.state;
+                return (
+                    <div>
+                        {JSON.stringify(this.state)}
+                        <form action="1.html" onSubmit={this.handlerSubmit}>
+                            姓名：<input name="username" value={username} onChange={this.handlerChange}/>  
+                            <br/>  
+                            密码：<input name="password" type="password" value={password} onChange={this.handlerChange}/>
+                            <br/>
+                            性别：
+                            <label>
+                                男:<input type="radio" name="gender" value="men" onChange={this.handlerChange} checked={gender=='men'?"checked":""}/>    
+                            </label>
+                            <label>
+                                女:<input type="radio" name="gender" value="women" onChange={this.handlerChange} checked={gender=='women'?"checked":""}/>    
+                            </label>
+                            <br/>
+                            家庭住址：
+                            <select name="address" value={address} onChange={this.handlerChange}>
+                               {addresses.map((item,index)=>{
+                                   return <option value={item.val} key={item.id}>{item.name}</option>
+                               })}   
+                            </select>
+                            <br/>
+                            个人简介：
+                            <textarea name="des" value={des} onChange={this.handlerChange} placeholder="请输入"></textarea>
+                            <br/>
+                            你最喜欢的水果？
+                             香蕉： <input type="checkbox" name="like" value="bb" onChange={this.handlerChange}/>
+                             橘子： <input type="checkbox" name="like" value="oo" onChange={this.handlerChange}/>
+                             车厘子： <input type="checkbox" name="like" value="cc" onChange={this.handlerChange}/>
+                             桃子： <input type="checkbox" name="like" value="tt" onChange={this.handlerChange}/>
+                            <br/>
+                            <input type="submit" value="提交"/>
+                        </form>
+                    </div>
+                )
+            }
+        }
+
+  
+    //组件的渲染
+        ReactDOM.render(<MyForm/>,
+        document.getElementById('app')
+        );
+    </script>
+</body>
+</html>
